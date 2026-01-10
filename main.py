@@ -3,6 +3,12 @@ import traceback
 import time
 from contextlib import contextmanager
 import locale
+# MODULES:
+from modules.drawboard import drawBoard
+
+
+
+
 locale.setlocale(locale.LC_ALL, '')
 FPS = 15
 FRAME_TIME = 1 / FPS
