@@ -33,7 +33,6 @@ data = [[[" "]*width]*height]
 
 
 def main(stdscr):
-    global v
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
