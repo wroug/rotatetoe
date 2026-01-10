@@ -161,8 +161,7 @@ def main(stdscr):
 
 
         stdscr.clear()
-        drawBoard()
-        #stdscr.addstr(row, col, "X", curses.A_REVERSE)
+
         stdscr.refresh()
 
 
