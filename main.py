@@ -13,9 +13,12 @@ def section(name=None):
     yield
 
 
-v = [["","",""],
-     ["","",""],
-     ["","",""]]
+height = int(input("Board height?\n > "))
+width = int(input("Board width?\n > "))
+
+data = [[[" "]*width]*height]
+
+
 
 
 
