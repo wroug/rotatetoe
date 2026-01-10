@@ -51,68 +51,11 @@ def main(stdscr):
         col = 0
 
 
-    def drawBoard():
-        nonlocal row, col
-        prerow, precol = row, col
-        stdscr.addstr(row, col, "╔═╤═╤═╗")
-        row += 1
 
-        stdscr.addstr(row, col, "┊")
-        col += 1
-        stdscr.addstr(row,col,v[0][0])
-        col += 1
-        stdscr.addstr(row,col,"│")
-        col += 1
-        stdscr.addstr(row,col,v[0][1])
-        col += 1
-        stdscr.addstr(row,col,"│")
-        col += 1
-        stdscr.addstr(row,col,v[0][2])
-        col += 1
-        stdscr.addstr(row, col, "┊")
-        col -= 6
-        row += 1
 
-        stdscr.addstr(row,col,"╟─┼─┼─╢")
-        row += 1
 
-        stdscr.addstr(row, col, "┊")
-        col += 1
-        stdscr.addstr(row, col, v[1][0])
-        col += 1
-        stdscr.addstr(row, col, "│")
-        col += 1
-        stdscr.addstr(row, col, v[1][1])
-        col += 1
-        stdscr.addstr(row, col, "│")
-        col += 1
-        stdscr.addstr(row, col, v[1][2])
-        col += 1
-        stdscr.addstr(row, col, "┊")
-        col -= 6
-        row += 1
 
-        stdscr.addstr(row, col, "╟─┼─┼─╢")
-        row += 1
 
-        stdscr.addstr(row, col, "┊")
-        col += 1
-        stdscr.addstr(row, col, v[2][0])
-        col += 1
-        stdscr.addstr(row, col, "│")
-        col += 1
-        stdscr.addstr(row, col, v[2][1])
-        col += 1
-        stdscr.addstr(row, col, "│")
-        col += 1
-        stdscr.addstr(row, col, v[2][2])
-        col += 1
-        stdscr.addstr(row, col, "┊")
-        col -= 6
-        row += 1
-        stdscr.addstr(row, col, "╚═╧═╧═╝")
-
-        row, col = prerow, precol
 
 
 
