@@ -88,6 +88,8 @@ def main(stdscr):
             getkeys = False
 
 
+        with section("Clear conditons"):
+            if down or up or right or left: # on user input (likely will move something)
 
 
         with section("move"):
