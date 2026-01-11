@@ -35,31 +35,31 @@ def drawboard(height, width, data, compact=False):
     elif not compact:
         board = []
 
-        tmp = "  "
+        tmp = "╔═══"
         for i in range(width - 1):  # top border
-            tmp += "  "
-        tmp += " "
+            tmp += "╤═══"
+        tmp += "╗"
         board.append(tmp)
 
         for i in range(height):
-            tmp = f" {data[i][0]}"
+            tmp = f"┊ {data[i][0]}"
             for j in range(width - 1):
                 tmp += f" | {data[i][j + 1]}"
-            tmp += " "
+            tmp += " ┊"
             board.append(tmp)
 
-            tmp = "---"
+            tmp = "╟───"
             for j in range(width - 1):  # top border
-                tmp += "+---"
-            tmp += ""
+                tmp += "┼───"
+            tmp += "╢"
             board.append(tmp)
 
         board.pop()
 
-        tmp = "  "
+        tmp = "╚═══"
         for i in range(width - 1):  # top border
-            tmp += "  "
-        tmp += " "
+            tmp += "╧═══"
+        tmp += "╝"
         board.append(tmp)
 
         return board
