@@ -24,7 +24,7 @@ width = int(input("Board width?\n > "))
 
 data = [[" "]*width]*height
 
-
+brow, bcol = 0, 0 #board row & board column
 
 
 
