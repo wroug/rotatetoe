@@ -129,7 +129,7 @@ def main(stdscr):
             drow += 1
         drow -= len(drawboard(height, width, data))
 
-        offsetcol, offsetrow = cellToOffset(bcol, brow)
+        offsetcol, offsetrow = celltooffset(bcol, brow)
         stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
 
         stdscr.refresh()
