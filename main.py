@@ -21,7 +21,7 @@ def section(name=None):
 
 height = int(input("Board height?\n > "))
 width = int(input("Board width?\n > "))
-
+compact = input("Compact? (y/n)\n > ").lower().startswith("y")
 data = [[" "] * width for _ in range(height)]
 
 brow, bcol = 0, 0 #board row & board column
@@ -33,7 +33,7 @@ brow, bcol = 0, 0 #board row & board column
 
 
 def main(stdscr):
-    global brow, bcol, height, width, data, enter
+    global brow, bcol, height, width, data, enter, compact
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
@@ -52,8 +52,8 @@ def main(stdscr):
         stdscr.refresh()
         col = 0
 
-    def celltooffset(bx, by, compact=False):
-        if compact:
+    def celltooffset(bx, by, c=False):
+        if c:
             x = bx*2+1
             y = (by*2)+1
             return x,y
@@ -122,14 +122,14 @@ def main(stdscr):
 
         #TEST(data)
 
-        drow, dcol = centercoords(drawboard(height, width, data), [twidth, theight])
-        for i in drawboard(height, width, data):
+        drow, dcol = centercoords(drawboard(height, width, data, compact), [twidth, theight])
+        for i in drawboard(height, width, data, compact):
 
             stdscr.addstr(drow, dcol, i)
             drow += 1
-        drow -= len(drawboard(height, width, data))
+        drow -= len(drawboard(height, width, data, compact))
 
-        offsetcol, offsetrow = celltooffset(bcol, brow)
+        offsetcol, offsetrow = celltooffset(bcol, brow, compact)
         stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
 
         stdscr.refresh()
