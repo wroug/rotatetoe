@@ -51,10 +51,10 @@ def main(stdscr):
         stdscr.refresh()
         col = 0
 
-    def cellToOffset(bx, by, height, width):
-        x = bx*2
-        y = by*2
-        return (x,y)
+    def cellToOffset(bx, by):
+        x = bx*2+1
+        y = (by*2)+1
+        return x,y
 
 
 
