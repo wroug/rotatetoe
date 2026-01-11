@@ -103,13 +103,13 @@ def main(stdscr):
 
         with section("move"):
             if down:
-                row += 1
+                brow += 1 if brow != width-1 else 0
             if up:
-                row -= 1
+                brow -= 1 if brow != 0 else 0
             if left:
-                col -= 1
+                bcol -= 1 if bcol != 0 else 0
             if right:
-                col += 1
+                bcol += 1 if bcol != width-1 else 0
 
 
 
