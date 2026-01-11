@@ -60,7 +60,7 @@ def main(stdscr):
         else:
             x = bx*4+1
             y = by*2+1
-            return x,y
+            return x+1,y
     letter = False
 
 
