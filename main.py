@@ -33,6 +33,7 @@ brow, bcol = 0, 0 #board row & board column
 
 
 def main(stdscr):
+    global brow, bcol, height, width, data
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
