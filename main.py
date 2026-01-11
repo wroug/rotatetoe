@@ -3,9 +3,10 @@ import traceback
 import time
 from contextlib import contextmanager
 import locale
+import os
 # MODULES:
 from modules.drawboard import drawboard
-
+from modules.centerui import centercoords
 
 
 
@@ -41,7 +42,7 @@ def main(stdscr):
     stdscr.nodelay(True)
     clear = True
     row, col = 5, 5
-
+    theight, twidth = stdscr.getmaxyx()
     def TEST(text="NONE"):
         stdscr.addstr(5,5,f"[TEST]-[{text}]")
 
@@ -117,14 +118,15 @@ def main(stdscr):
 
         #TEST(data)
 
-
+        drow, dcol = centercoords(drawboard(height, width, data), [twidth, theight])
         for i in drawboard(height, width, data):
-            stdscr.addstr(row, col, i)
-            row += 1
-        row -= len(drawboard(height, width, data))
+
+            stdscr.addstr(drow, dcol, i)
+            drow += 1
+        drow -= len(drawboard(height, width, data))
 
         offsetcol, offsetrow = cellToOffset(bcol, brow)
-        stdscr.addch(row+offsetrow, col+offsetcol, data[brow][bcol], curses.A_REVERSE)
+        stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
 
         stdscr.refresh()
 
