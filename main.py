@@ -115,7 +115,7 @@ def main(stdscr):
             data[brow][bcol] = ("X" if letter else "O") if data[brow][bcol] == " " else data[brow][bcol]
             letter = not letter
 
-        TEST(data)
+        #TEST(data)
 
 
         for i in drawboard(height, width, data):
