@@ -40,7 +40,7 @@ def main(stdscr):
     stdscr.keypad(True)
     stdscr.nodelay(True)
     clear = True
-    row, col = 0, 0
+    row, col = 5, 5
 
     def TEST(text="NONE"):
         stdscr.addstr(5,5,f"[TEST]-[{text}]")
