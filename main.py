@@ -102,7 +102,11 @@ def main(stdscr):
 
 
 
-        stdscr.clear()
+        for i in drawboard(height, width, data):
+            stdscr.addstr(row, col, i)
+            row += 1
+        row -= len(drawboard(height, width, data))
+
 
         stdscr.refresh()
 
