@@ -118,6 +118,8 @@ def main(stdscr):
             row += 1
         row -= len(drawboard(height, width, data))
 
+        offsetcol, offsetrow = cellToOffset(bcol, brow)
+        stdscr.addstr(row+offsetrow, col+offsetcol, "░")
 
         stdscr.refresh()
 
