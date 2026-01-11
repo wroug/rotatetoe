@@ -52,7 +52,7 @@ def main(stdscr):
         stdscr.refresh()
         col = 0
 
-    def cellToOffset(bx, by, compact=False):
+    def celltooffset(bx, by, compact=False):
         if compact:
             x = bx*2+1
             y = (by*2)+1
