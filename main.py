@@ -90,7 +90,7 @@ def main(stdscr):
 
         with section("Clear conditons"):
             if down or up or right or left: # on user input (likely will move something)
-
+                clear=True
         if clear:
             stdscr.clear()
             clear = False
