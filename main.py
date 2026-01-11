@@ -22,7 +22,7 @@ def section(name=None):
 height = int(input("Board height?\n > "))
 width = int(input("Board width?\n > "))
 
-data = [[" "]*width]*height
+data = [[" "] * width for _ in range(height)]
 
 brow, bcol = 0, 0 #board row & board column
 
@@ -33,7 +33,7 @@ brow, bcol = 0, 0 #board row & board column
 
 
 def main(stdscr):
-    global brow, bcol, height, width, data
+    global brow, bcol, height, width, data, enter
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
@@ -56,7 +56,7 @@ def main(stdscr):
         x = bx*2+1
         y = (by*2)+1
         return x,y
-
+    letter = False
 
 
 
@@ -89,7 +89,7 @@ def main(stdscr):
                 left = True
             if key == curses.KEY_RIGHT:
                 right = True
-            if key == curses.KEY_ENTER:
+            if key in (curses.KEY_ENTER, 10, 13):
                 enter = True
             getkeys = False
 
@@ -111,6 +111,11 @@ def main(stdscr):
             if right:
                 bcol += 1 if bcol != width-1 else 0
 
+        if enter:
+            data[brow][bcol] = ("X" if letter else "O") if data[brow][bcol] == " " else data[brow][bcol]
+            letter = not letter
+
+        TEST(data)
 
 
         for i in drawboard(height, width, data):
@@ -119,7 +124,7 @@ def main(stdscr):
         row -= len(drawboard(height, width, data))
 
         offsetcol, offsetrow = cellToOffset(bcol, brow)
-        stdscr.addstr(row+offsetrow, col+offsetcol, "░")
+        stdscr.addch(row+offsetrow, col+offsetcol, data[brow][bcol], curses.A_REVERSE)
 
         stdscr.refresh()
 
