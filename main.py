@@ -3,7 +3,6 @@ import traceback
 import time
 from contextlib import contextmanager
 import locale
-import os
 # MODULES:
 from modules.drawboard import drawboard
 from modules.centerui import centercoords
@@ -53,10 +52,15 @@ def main(stdscr):
         stdscr.refresh()
         col = 0
 
-    def cellToOffset(bx, by):
-        x = bx*2+1
-        y = (by*2)+1
-        return x,y
+    def cellToOffset(bx, by, compact=False):
+        if compact:
+            x = bx*2+1
+            y = (by*2)+1
+            return x,y
+        else:
+            x = bx*4+1
+            y = by*2+1
+            return x,y
     letter = False
 
 
