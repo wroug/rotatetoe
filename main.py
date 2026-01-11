@@ -4,7 +4,7 @@ import time
 from contextlib import contextmanager
 import locale
 # MODULES:
-from modules.drawboard import drawBoard
+from modules.drawboard import drawboard
 
 
 
