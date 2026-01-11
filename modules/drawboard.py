@@ -44,7 +44,7 @@ def drawboard(height, width, data, compact=False):
         for i in range(height):
             tmp = f"┊ {data[i][0]}"
             for j in range(width - 1):
-                tmp += f" | {data[i][j + 1]}"
+                tmp += f" │git  {data[i][j + 1]}"
             tmp += " ┊"
             board.append(tmp)
 
