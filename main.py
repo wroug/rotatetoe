@@ -38,6 +38,7 @@ def main(stdscr):
     stdscr.clear()
     stdscr.keypad(True)
     stdscr.nodelay(True)
+    clear = True
     row, col = 0, 0
 
     def TEST(text="NONE"):
