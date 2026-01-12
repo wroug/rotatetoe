@@ -21,19 +21,19 @@ def section(name=None):
 
 height = int(input("Board height?\n > "))
 width = int(input("Board width?\n > "))
-compact = input("Compact? (y/n)\n > ").lower().startswith("y")
+compact = False #input("Compact? (y/n)\n > ").lower().startswith("y")
 gwidth = int(input("Game window width?\n > "))
 data = [[" "] * width for _ in range(height)]
 brow, bcol = 0, 0 #board row & board column
 
 
-
+xray = True
 
 
 
 
 def main(stdscr):
-    global brow, bcol, height, width, data, enter, compact, gwidth
+    global brow, bcol, height, width, data, enter, compact, gwidth, placed
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
