@@ -17,7 +17,7 @@ def drawboard(height, width, data, compact=False):
             board.append(tmp)
 
             tmp = "╟───"
-            for j in range(width - 1):  # top border
+            for j in range(width - 1):  # middle borders
                 tmp += "┼───"
             tmp += "╢"
             board.append(tmp)
@@ -25,7 +25,7 @@ def drawboard(height, width, data, compact=False):
         board.pop()
 
         tmp = "╚═══"
-        for i in range(width - 1):  # top border
+        for i in range(width - 1):  # bottom border
             tmp += "╧═══"
         tmp += "╝"
         board.append(tmp)

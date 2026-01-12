@@ -9,16 +9,14 @@ from modules.centerui import centercoords
 from modules.getvisualdata import  getvisualdata
 
 
-locale.setlocale(locale.LC_ALL, '')
-FPS = 15
-FRAME_TIME = 1 / FPS
-BLINK_RATE = 0.5
+locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 
-@contextmanager
+
+@contextmanager #idk
 def section(name=None):
     yield
 
-
+# User settings
 height = int(input("Board height?\n > "))
 width = int(input("Board width?\n > "))
 compact = False #input("Compact? (y/n)\n > ").lower().startswith("y")
@@ -33,6 +31,7 @@ xray = True
 
 
 def main(stdscr):
+    # CONFIG STUFF:
     global brow, bcol, height, width, data, enter, compact, gwidth, placed
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
@@ -50,14 +49,14 @@ def main(stdscr):
     def TEST(text="NONE"):
         stdscr.addstr(5,5,f"[TEST]-[{text}]")
 
-    def cprint(text):
+    def cprint(text): #useless function with no purpse
         nonlocal row, col
         stdscr.addstr(row, 0, str(text))
         row += 1
         stdscr.refresh()
         col = 0
 
-    def celltooffset(bx, by, c=False):
+    def celltooffset(bx, by, c=False):  #maths, idk how to explain more
         if c:
             x = bx*2+1
             y = (by*2)+1
@@ -80,7 +79,7 @@ def main(stdscr):
     last_blink = time.time()
     running = True
     while running:
-        start_time = time.time()
+
 
 
         #stdscr.clear()
@@ -114,56 +113,54 @@ def main(stdscr):
             placed = True
 
         #TEST(vdata)
-        def xrayrender():
+        def xrayrender():  #render function for seeing the background scrolling
             global data, board2
 
 
-            board2 = drawboard(height, width, data, compact)
-            drow, dcol = centercoords(board2, [twidth, theight])
+            board2 = drawboard(height, width, data, compact)           #draws the board
+            drow, dcol = centercoords(board2, [twidth, theight])  #centers drawn board on the
             for i in board2:
-                stdscr.addstr(drow, dcol, i, curses.color_pair(1))
+                stdscr.addstr(drow, dcol, i, curses.color_pair(1))     #displays with color 1
                 drow += 1
-            drow -= len(board2)
+            drow -= len(board2)                                        #moves display row back to original place
 
 
 
 
 
 
-        def render():
+        def render(): #main playable board rendering
             global vdata, xray
             vdata = getvisualdata(data, gwidth)
 
-            board = drawboard(height, gwidth, vdata, compact)
-            drow, dcol = centercoords(board2 if xray else board, [twidth, theight])
+            board = drawboard(height, gwidth, vdata, compact)                                   #draws board
+            drow, dcol = centercoords(board2 if xray else board, [twidth, theight])        #if xray is on, sets board location to be at left side of xray board
             for i in board:
 
-                stdscr.addstr(drow, dcol, i, curses.color_pair(2))
+                stdscr.addstr(drow, dcol, i, curses.color_pair(2))                              #displays board
                 drow += 1
             drow -= len(board)
 
-            offsetcol, offsetrow = celltooffset(bcol, brow, compact)
-            stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
+            offsetcol, offsetrow = celltooffset(bcol, brow, compact)                            #sets offset for cursor
+            stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)    #renders the cursor
 
             stdscr.refresh()
         if xray:
             xrayrender()
         render()
         if placed:
-            tmp_data = [list(col) for col in zip(*data)]
-            tmp_data.append(tmp_data.pop(0))
-            data = [list(row) for row in zip(*tmp_data)]
+            tmp_data = [list(col) for col in zip(*data)] #converts it from row-based grid to column based grid
+            tmp_data.append(tmp_data.pop(0))             #moves rightmost column to left
+            data = [list(row) for row in zip(*tmp_data)] #converts back
             placed = False
             #time.sleep(0.2)
             #render()
 
 
-        elapsed = time.time() - start_time
-        sleep_time = max(0, round(FRAME_TIME - elapsed))
-        #time.sleep(sleep_time)
+
         getkeys = True
         while getkeys:
-            down, up, left, right, enter = False, False, False, False, False
+            down, up, left, right, enter = False, False, False, False, False #resets inputs before next check
             key = stdscr.getch()
             pressed = False
             # while not pressed:
