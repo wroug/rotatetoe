@@ -111,21 +111,51 @@ def main(stdscr):
         if enter:
             data[brow][bcol] = ("X" if letter else "O") if data[brow][bcol] == " " else data[brow][bcol]
             letter = not letter
+            placed = True
 
-        TEST(vdata)
-        board = drawboard(height, gwidth, vdata, compact)
-        drow, dcol = centercoords(board, [twidth, theight])
-        for i in board:
+        #TEST(vdata)
+        def xrayrender():
+            global data, board2
 
-            stdscr.addstr(drow, dcol, i)
-            drow += 1
-        drow -= len(board)
 
-        offsetcol, offsetrow = celltooffset(bcol, brow, compact)
-        stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
+            board2 = drawboard(height, width, data, compact)
+            drow, dcol = centercoords(board2, [twidth, theight])
+            for i in board2:
+                stdscr.addstr(drow, dcol, i, curses.color_pair(1))
+                drow += 1
+            drow -= len(board2)
 
-        stdscr.refresh()
 
+
+
+
+
+        def render():
+            global vdata, xray
+            vdata = getvisualdata(data, gwidth)
+
+            board = drawboard(height, gwidth, vdata, compact)
+            drow, dcol = centercoords(board2 if xray else board, [twidth, theight])
+            for i in board:
+
+                stdscr.addstr(drow, dcol, i, curses.color_pair(2))
+                drow += 1
+            drow -= len(board)
+
+            offsetcol, offsetrow = celltooffset(bcol, brow, compact)
+            stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
+
+            stdscr.refresh()
+        if xray:
+            xrayrender()
+        render()
+        if placed:
+            tmp_data = [list(col) for col in zip(*data)]
+            tmp_data.append(tmp_data.pop(0))
+            data = [list(row) for row in zip(*tmp_data)]
+            placed = False
+            #time.sleep(0.2)
+            #render()
 
 
         elapsed = time.time() - start_time
