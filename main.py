@@ -39,7 +39,12 @@ def main(stdscr):
     stdscr.clear()
     stdscr.keypad(True)
     stdscr.nodelay(False)
+    curses.start_color()
+    curses.use_default_colors()
+    curses.init_pair(1, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
     clear = True
+    placed = False
     row, col = 5, 5
     theight, twidth = stdscr.getmaxyx()
     def TEST(text="NONE"):
