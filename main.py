@@ -6,7 +6,7 @@ import locale
 # MODULES:
 from modules.drawboard import drawboard
 from modules.centerui import centercoords
-
+from modules.getvisualdata import  getvisualdata
 
 
 locale.setlocale(locale.LC_ALL, '')
@@ -22,8 +22,8 @@ def section(name=None):
 height = int(input("Board height?\n > "))
 width = int(input("Board width?\n > "))
 compact = input("Compact? (y/n)\n > ").lower().startswith("y")
+gwidth = int(input("Game window width?\n > "))
 data = [[" "] * width for _ in range(height)]
-
 brow, bcol = 0, 0 #board row & board column
 
 
@@ -33,12 +33,12 @@ brow, bcol = 0, 0 #board row & board column
 
 
 def main(stdscr):
-    global brow, bcol, height, width, data, enter, compact
+    global brow, bcol, height, width, data, enter, compact, gwidth
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
     stdscr.keypad(True)
-    stdscr.nodelay(True)
+    stdscr.nodelay(False)
     clear = True
     row, col = 5, 5
     theight, twidth = stdscr.getmaxyx()
@@ -63,8 +63,7 @@ def main(stdscr):
             return x+1,y
     letter = False
 
-
-
+    down, up, left, right, enter = False, False, False, False, False
 
 
 
@@ -78,14 +77,62 @@ def main(stdscr):
     while running:
         start_time = time.time()
 
+
         #stdscr.clear()
+
+
+
+        with section("Clear conditons"):
+            if down or up or right or left: # on user input (likely will move something)
+                clear=True
+        if clear:
+            stdscr.clear()
+            clear = False
+
+        with section("move"):
+            if down:
+                brow += 1 if brow != height-1 else 0
+            if up:
+                brow -= 1 if brow != 0 else 0
+            if left:
+                bcol -= 1 if bcol != 0 else 0
+            if right:
+                bcol += 1 if bcol != gwidth-1 else 0
+
+
+        vdata = getvisualdata(data, gwidth)
+
+
+        if enter:
+            data[brow][bcol] = ("X" if letter else "O") if data[brow][bcol] == " " else data[brow][bcol]
+            letter = not letter
+
+        TEST(vdata)
+        board = drawboard(height, gwidth, vdata, compact)
+        drow, dcol = centercoords(board, [twidth, theight])
+        for i in board:
+
+            stdscr.addstr(drow, dcol, i)
+            drow += 1
+        drow -= len(board)
+
+        offsetcol, offsetrow = celltooffset(bcol, brow, compact)
+        stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
+
+        stdscr.refresh()
+
+
+
+        elapsed = time.time() - start_time
+        sleep_time = max(0, round(FRAME_TIME - elapsed))
+        #time.sleep(sleep_time)
         getkeys = True
         while getkeys:
             down, up, left, right, enter = False, False, False, False, False
             key = stdscr.getch()
             pressed = False
-            while not pressed:
-                pressed = bool(stdscr.getch())
+            # while not pressed:
+            #    pressed = bool(stdscr.getch())
             if key == curses.KEY_DOWN:
                 down = True
             if key == curses.KEY_UP:
@@ -98,47 +145,6 @@ def main(stdscr):
                 enter = True
             getkeys = False
 
-
-        with section("Clear conditons"):
-            if down or up or right or left: # on user input (likely will move something)
-                clear=True
-        if clear:
-            stdscr.clear()
-            clear = False
-
-        with section("move"):
-            if down:
-                brow += 1 if brow != width-1 else 0
-            if up:
-                brow -= 1 if brow != 0 else 0
-            if left:
-                bcol -= 1 if bcol != 0 else 0
-            if right:
-                bcol += 1 if bcol != width-1 else 0
-
-        if enter:
-            data[brow][bcol] = ("X" if letter else "O") if data[brow][bcol] == " " else data[brow][bcol]
-            letter = not letter
-
-        #TEST(data)
-
-        drow, dcol = centercoords(drawboard(height, width, data, compact), [twidth, theight])
-        for i in drawboard(height, width, data, compact):
-
-            stdscr.addstr(drow, dcol, i)
-            drow += 1
-        drow -= len(drawboard(height, width, data, compact))
-
-        offsetcol, offsetrow = celltooffset(bcol, brow, compact)
-        stdscr.addch(drow+offsetrow, dcol+offsetcol, data[brow][bcol], curses.A_REVERSE)
-
-        stdscr.refresh()
-
-
-
-        elapsed = time.time() - start_time
-        sleep_time = max(0, round(FRAME_TIME - elapsed))
-        #time.sleep(sleep_time)
 
 
 try:
