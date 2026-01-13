@@ -14,4 +14,6 @@ def commandinit(disp):
     # stdscr nor disp work in the return-exec thingy so use xac instead
     if command == "xray":
         return "xac.clear(); xray = not xray"
+    elif command == "quit":
+        return "quit()"
     else: return "xray = xray"
