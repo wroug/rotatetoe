@@ -41,4 +41,5 @@ def wincheck(datain):
                         return "O"
                     else:
                         return " "
-
+                else:
+                    return " "
