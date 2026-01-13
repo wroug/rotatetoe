@@ -108,9 +108,10 @@ def main(stdscr):
 
 
         if enter:
+            placed = (data[brow][bcol] == " ")
             data[brow][bcol] = ("X" if letter else "O") if data[brow][bcol] == " " else data[brow][bcol]
             letter = not letter
-            placed = True
+            
 
         #TEST(vdata)
         def xrayrender():  #render function for seeing the background scrolling
