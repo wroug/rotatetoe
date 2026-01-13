@@ -15,6 +15,7 @@ def wincheck(datain):
         [(0, 0), (1, 1), (2, 2)],
         [(2, 0), (1, 1), (0, 2)]
     ]
+    xwin, owin = 0, 0
     data = deepcopy(datain)
     tmp_data = [list(col) for col in zip(*data)]
     tmp_data.append(tmp_data[0])
@@ -36,10 +37,8 @@ def wincheck(datain):
                 pattern = patterns[patternnum]
                 if safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] == safedata[rownum+pattern[1][0]][cellnum+pattern[1][1]] == safedata[rownum+pattern[2][0]][cellnum+pattern[2][1]] and safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] != " ":
                     if safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] == 'X':
-                        return "X"
+                        xwin += 1
                     elif safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] == 'O':
-                        return "O"
-                    else:
-                        return " "
-                else:
-                    return " "
+                        owin += 1
+
+    return xwin, owin

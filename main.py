@@ -8,6 +8,7 @@ from modules.drawboard import drawboard
 from modules.centerui import centercoords
 from modules.getvisualdata import  getvisualdata
 from modules.commands import commandinit
+from modules.wincheck import wincheck
 
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 
@@ -157,8 +158,8 @@ def main(stdscr):
             placed = False
             #time.sleep(0.2)
             #render()
-
-        #TEST(xray)
+        wins = wincheck(data)
+        TEST(f"{wins[0]+" "+wins[1]} won | {data}")
 
         getkeys = True
         while getkeys:
