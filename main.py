@@ -73,8 +73,9 @@ def main(stdscr):
 
 
 
-
-
+    for y in range(theight-1):
+            stdscr.addstr(y, 0, " "*(twidth-1), curses.color_pair(1))
+    stdscr.refresh()
         #while True:
     #    stdscr.addstr(1,1,"Hello!")
     #    stdscr.refresh()
@@ -91,6 +92,7 @@ def main(stdscr):
         with section("Clear conditons"):
             if down or up or right or left: # on user input (likely will move something)
                 clear=False  # REMOVING CLEAR REMOVES FLICKER
+        clear = False
         if clear:
             stdscr.clear()
             clear = False
@@ -159,7 +161,7 @@ def main(stdscr):
             #time.sleep(0.2)
             #render()
         wins = wincheck(data)
-        TEST(f"{wins[0]+" "+wins[1]} won | {data}")
+        #TEST(f"  x:{wins[0]} | o:{wins[1]} | {data}")                                                                                                  # -----------TESTLINE----------
 
         getkeys = True
         while getkeys:

@@ -30,15 +30,19 @@ def wincheck(datain):
     safedata = [list(row) for row in zip(*tmp_data)]
 
     for rownum in range(len(data)):
-        row = safedata[rownum]
-        for cellnum in range(len(row)):
-            cell = row[cellnum]
-            for patternnum in range(len(patterns)):
-                pattern = patterns[patternnum]
-                if safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] == safedata[rownum+pattern[1][0]][cellnum+pattern[1][1]] == safedata[rownum+pattern[2][0]][cellnum+pattern[2][1]] and safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] != " ":
-                    if safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] == 'X':
-                        xwin += 1
-                    elif safedata[rownum+pattern[0][0]][cellnum+pattern[0][1]] == 'O':
-                        owin += 1
+        for cellnum in range(len(data[0])):
+            for pattern in patterns:
+                try:
+                    a, b, c = pattern
+                    vals = [safedata[rownum + a[0]][cellnum + a[1]],
+                            safedata[rownum + b[0]][cellnum + b[1]],
+                            safedata[rownum + c[0]][cellnum + c[1]]]
+                    if vals[0] != " " and vals[0] == vals[1] == vals[2]:
+                        if vals[0] == 'X':
+                            xwin += 1
+                        elif vals[0] == 'O':
+                            owin += 1
+                except IndexError:
+                    continue
 
     return xwin, owin
