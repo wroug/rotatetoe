@@ -7,7 +7,7 @@ import locale
 from modules.drawboard import drawboard
 from modules.centerui import centercoords
 from modules.getvisualdata import  getvisualdata
-
+from modules.commands import commandinit
 
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 
@@ -32,7 +32,8 @@ xray = True
 
 def main(stdscr):
     # CONFIG STUFF:
-    global brow, bcol, height, width, data, enter, compact, gwidth, placed
+    global brow, bcol, height, width, data, enter, compact, gwidth, placed, xac
+    xac = stdscr
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
@@ -157,7 +158,7 @@ def main(stdscr):
             #time.sleep(0.2)
             #render()
 
-
+        TEST(xray)
 
         getkeys = True
         while getkeys:
@@ -176,6 +177,8 @@ def main(stdscr):
                 right = True
             if key in (curses.KEY_ENTER, 10, 13):
                 enter = True
+            if key == ord(':'):
+                exec(commandinit(stdscr), globals())
             getkeys = False
 
 
