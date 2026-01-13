@@ -88,7 +88,7 @@ def main(stdscr):
 
         with section("Clear conditons"):
             if down or up or right or left: # on user input (likely will move something)
-                clear=True  # REMOVING CLEAR REMOVES FLICKER
+                clear=False  # REMOVING CLEAR REMOVES FLICKER
         if clear:
             stdscr.clear()
             clear = False
