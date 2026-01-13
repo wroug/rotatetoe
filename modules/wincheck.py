@@ -15,6 +15,12 @@ patterns = [
 ]
 
 def wincheck(datain):
+    patterns = [
+        [(0, 0), (1, 0), (2, 0)],
+        [(0, 0), (0, 1), (0, 2)],
+        [(0, 0), (1, 1), (2, 2)],
+        [(2, 0), (1, 1), (0, 2)]
+    ]
     data = deepcopy(datain)
     tmp_data = [list(col) for col in zip(*data)]
     tmp_data.append(tmp_data[0])
