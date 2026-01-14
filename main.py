@@ -9,7 +9,9 @@ from modules.centerui import centercoords
 from modules.getvisualdata import  getvisualdata
 from modules.commands import commandinit
 from modules.wincheck import wincheck
-
+from modules.firsttimecheck import firsttimecheck
+from modules.tutorial import tutorial
+from modules.cleanup import cleanup
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 
 
@@ -18,10 +20,10 @@ def section(name=None):
     yield
 
 # User settings
-height = int(input("Board height?\n > "))
-width = int(input("Board width?\n > "))
+height = 3#int(input("Board height?\n > "))
+width = 10#int(input("Board width?\n > "))
 compact = False #input("Compact? (y/n)\n > ").lower().startswith("y")
-gwidth = int(input("Game window width?\n > "))
+gwidth = 3#int(input("Game window width?\n > "))
 data = [[" "] * width for _ in range(height)]
 brow, bcol = 0, 0 #board row & board column
 
@@ -80,8 +82,16 @@ def main(stdscr):
     #    stdscr.addstr(1,1,"Hello!")
     #    stdscr.refresh()
     last_blink = time.time()
+
+    tutorialyn = firsttimecheck(stdscr)
+
+    for y in range(theight-1):
+            stdscr.addstr(y, 0, " "*(twidth-1), curses.color_pair(1))
+    stdscr.refresh()
+
     running = True
     while running:
+
 
 
 
@@ -162,7 +172,14 @@ def main(stdscr):
             #render()
         wins = wincheck(data)
         #TEST(f"  x:{wins[0]} | o:{wins[1]} | {data}")                                                                                                  # -----------TESTLINE----------
-
+        if tutorialyn:
+            tutorial(stdscr)
+            for y in range(theight - 1):
+                stdscr.addstr(y, 0, " " * (twidth - 1), curses.color_pair(1))
+            if xray:
+                xrayrender()
+            render()
+        tutorialyn = False
         getkeys = True
         while getkeys:
             down, up, left, right, enter = False, False, False, False, False #resets inputs before next check
@@ -188,6 +205,8 @@ def main(stdscr):
 
 try:
     curses.wrapper(main)
+except KeyboardInterrupt:
+    cleanup()
 except Exception:
     curses.endwin()
     traceback.print_exc()

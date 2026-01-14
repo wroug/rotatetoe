@@ -1,0 +1,2 @@
+The board itself loops so don't worry,
+your marks won't dissapear!

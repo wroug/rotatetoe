@@ -1,0 +1,2 @@
+The game also has some commands. (eg :help)
+You can access the command menu by pressing :

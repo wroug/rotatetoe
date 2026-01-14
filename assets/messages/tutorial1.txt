@@ -1,0 +1,3 @@
+Great!
+
+Below this message you should be able to see the game board.

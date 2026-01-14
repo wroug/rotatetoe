@@ -1,0 +1,2 @@
+The purple area is the QUEUE.
+You cannot access it, but it previews which marks are coming, where they'll enter, and when they'll arrive.
