@@ -1,2 +1,2 @@
-Hello there! It seems like this is your first time playing this.
+Hello there! It seems like it is your first time playing this.
 Would you like a tutorial?

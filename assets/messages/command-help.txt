@@ -1,0 +1,4 @@
+:help - displays a list of commands
+:xray - toggles the queue
+:quit - quits the game
+:restart - restarts the game

@@ -1,4 +1,8 @@
 import curses
+from modules.texttools import *
+from modules.centerui import *
+from modules.getmessage import *
+
 
 def commandinit(disp):
     disp.attron(curses.A_REVERSE)

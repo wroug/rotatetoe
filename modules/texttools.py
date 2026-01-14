@@ -43,11 +43,11 @@ def loadchoices(win, filename, y, x, color_pair=0, color_pair_selected=2, cursor
     cposes=[]
     for choice, data in file.items():
 
-        yo = y+data["yoffset"]              #y offset
-        xo = x+data["xoffset"]              #x offset
+        yo = y+data["yoffset"]    +1          #y offset
+        xo = x+data["xoffset"]+1            #x offset
         cposes.append((yo, xo-1, data["id"], choice))
         win.addstr(yo, xo, choice, curses.color_pair(color_pair))
-    win.addch(y, x-1, cursor, curses.color_pair(color_pair))
+    win.addch(y+1, x, cursor, curses.color_pair(color_pair))
     getchoice=True
     fw, bw, sel = False, False, False
     cursorpos = 0
