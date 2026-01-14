@@ -88,7 +88,11 @@ def loadchoices(win, filename, y, x, color_pair=0, color_pair_selected=2, cursor
 
 
 
-
+def fill(win, color_pair=1, letter=" "):
+    theight, twidth = win.getmaxyx()
+    for y in range(theight-1):
+            win.addstr(y, 0, letter*(twidth-1), curses.color_pair(color_pair))
+    win.refresh()
 
 
 
