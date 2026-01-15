@@ -1,2 +1,2 @@
 def cleanup():
-    pass
+    quit()
