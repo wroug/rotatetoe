@@ -8,14 +8,17 @@ def tutorial(disp):
     marginy = int(theight * 0.05)
     marginx = marginy * 2
     tutorialid = 1
+    h=1
+    location=1
 
-
-    while tutorialid != 9:
+    while tutorialid != 10:
+        fill_rect(disp, marginy, location, twidth - 1 - (marginx * 2), h + 1, 1)
         location = centercoords(0, 0, twidth - 1 - (marginx * 2), twidth)
         h = drawtextbox(disp, marginy, location, twidth - 1 - (marginx * 2), -1, getmessage(f"tutorial{tutorialid}.txt"), 1)
+
         if tutorialid == 1:
             nav_file = "continue.json"
-        elif tutorialid == 8:
+        elif tutorialid == 9:
             nav_file = "tutorialdone.json"
         else:
             nav_file = "continueorback.json"
