@@ -1,6 +1,7 @@
 import curses
 import textwrap
 import json
+from modules.centerui import *
 
 
 def fill_rect(win, y, x, width, height, color_pair=0):
@@ -51,6 +52,7 @@ def loadchoices(win, filename, y, x, color_pair=0, color_pair_selected=2, cursor
     getchoice=True
     fw, bw, sel = False, False, False
     cursorpos = 0
+    win.refresh()
     while getchoice:
 
 
@@ -66,6 +68,7 @@ def loadchoices(win, filename, y, x, color_pair=0, color_pair_selected=2, cursor
             win.addstr(i[0], i[1], " "+i[3], curses.color_pair(color_pair))
 
         win.addstr(cposes[cursorpos][0], cposes[cursorpos][1], cursor+cposes[cursorpos][3], curses.color_pair(color_pair_selected))
+        win.refresh()
         getkeys = True
         while getkeys:
             fw, bw, sel = False, False, False
@@ -98,6 +101,61 @@ def fill(win, color_pair=1, letter=" "):
 
 
 
+def inputbox(win, title, scale=20, height=5, inputfile="0"):
+
+    fill(win, 7, "~")
+    theight, twidth = win.getmaxyx()
+
+    menuwidth = scale
 
 
+    marginy = centercoords(0, 0, height, theight)
+    marginx = centercoords(0, 0, scale, twidth)
+
+    inputx = marginx + 2
+    inputy = marginy + 3
+
+    location = centercoords(0, 0, menuwidth, twidth)
+    h = theight - 1 - marginy
+    h = drawtextbox(win, marginy, location, menuwidth, height, title+"\n\n", 1)
+
+    #curses.curs_set(1)
+
+    fill_rect(win, inputy, inputx, scale-4, 1, 5)
+    win.refresh()
+    win.attron(curses.color_pair(8))
+    curses.echo()
+    user_input = win.getstr(inputy, inputx, scale-4)
+    curses.noecho()
+    win.attroff(curses.color_pair(8))
+    user_input = user_input.decode("utf-8")
+    curses.curs_set(0)
+    return user_input
+
+
+
+def loadmenu(win, menufile):
+
+    with open(f"assets/menus/{menufile}") as f:
+        file = json.load(f)
+
+    fill(win, 7, "~")
+    theight, twidth = win.getmaxyx()
+
+    menuwidth = file["width"]
+    menuheight = file["height"]
+    title = file["title"]
+    choices = file["choices"]
+
+    menuitems = 4
+
+    marginy = centercoords(0, 0, menuheight, theight)
+    marginx = centercoords(0, 0, 20, twidth)
+
+    location = centercoords(0, 0, menuwidth, twidth)
+    h = theight - 1 - marginy
+    h = drawtextbox(win, marginy, location, menuwidth, -1, title + "\n"*(menuheight-3) , 1)
+    win.refresh()
+    if choices != 0:
+        return loadchoices(win, choices, marginy + 2, location + 2, 6)
 
