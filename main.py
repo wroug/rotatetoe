@@ -12,6 +12,7 @@ from modules.wincheck import wincheck
 from modules.firsttimecheck import firsttimecheck
 from modules.tutorial import tutorial
 from modules.cleanup import cleanup
+from modules.texttools import *
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 
 
