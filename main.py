@@ -45,6 +45,7 @@ def main(stdscr):
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
+    curses.set_escdelay(25)
     stdscr.keypad(True)
     stdscr.nodelay(False)
     curses.start_color()
