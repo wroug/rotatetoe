@@ -199,6 +199,7 @@ def main(stdscr):
                 enter = True
             if key == ord(':'):
                 exec(commandinit(stdscr), globals())
+                fill(stdscr)
             getkeys = False
 
 
