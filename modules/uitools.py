@@ -13,7 +13,7 @@ def fill_rect(win, y, x, width, height, color_pair=0):
 def writewrapped(win, y, x, text, width, color_pair=0, calc=False):
     linenumber = 0
     for paragraph in text.splitlines():
-        lines = textwrap.wrap(paragraph, width)
+        lines = textwrap.wrap(paragraph, width) or [""]
         for line in lines:
             if not calc:
                 win.addstr(y + linenumber, x, " "+line, curses.color_pair(color_pair))
