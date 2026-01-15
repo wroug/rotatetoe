@@ -1,5 +1,5 @@
 import curses
-from modules.texttools import *
+from modules.uitools import *
 from modules.centerui import *
 from modules.getmessage import *
 

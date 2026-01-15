@@ -1,5 +1,5 @@
 import json
-from modules.texttools import *
+from modules.uitools import *
 from modules.centerui import centercoords
 from modules.getmessage import getmessage
 
