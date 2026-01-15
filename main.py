@@ -23,10 +23,15 @@ def section(name=None):
 
 def restart():
     global height, width, compact, gwidth, data, brow, bcol
-    height = 3#int(input("Board height?\n > "))
-    width = 10#int(input("Board width?\n > "))
-    compact = False #input("Compact? (y/n)\n > ").lower().startswith("y")
-    gwidth = 3#int(input("Game window width?\n > "))
+
+    with open("modules/data.json") as f:
+        save = json.load(f)
+
+
+    height = save["height"]
+    width = save["width"]
+    compact = False
+    gwidth = save["gameareawidth"]
     data = [[" "] * width for _ in range(height)]
     brow, bcol = 0, 0 #board row & board column
 
@@ -151,7 +156,7 @@ def main(stdscr):
 
 
         def render(): #main playable board rendering
-            global vdata, xray
+            global vdata
             vdata = getvisualdata(data, gwidth)
 
             board = drawboard(height, gwidth, vdata, compact)                                   #draws board
