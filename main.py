@@ -12,7 +12,8 @@ from modules.wincheck import wincheck
 from modules.firsttimecheck import firsttimecheck
 from modules.tutorial import tutorial
 from modules.cleanup import cleanup
-from modules.texttools import *
+from modules.uiscripts.pausemenu import *
+from modules.colors import *
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 
 
@@ -20,14 +21,16 @@ locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 def section(name=None):
     yield
 
-# User settings
-height = 3#int(input("Board height?\n > "))
-width = 10#int(input("Board width?\n > "))
-compact = False #input("Compact? (y/n)\n > ").lower().startswith("y")
-gwidth = 3#int(input("Game window width?\n > "))
-data = [[" "] * width for _ in range(height)]
-brow, bcol = 0, 0 #board row & board column
+def restart():
+    global height, width, compact, gwidth, data, brow, bcol
+    height = 3#int(input("Board height?\n > "))
+    width = 10#int(input("Board width?\n > "))
+    compact = False #input("Compact? (y/n)\n > ").lower().startswith("y")
+    gwidth = 3#int(input("Game window width?\n > "))
+    data = [[" "] * width for _ in range(height)]
+    brow, bcol = 0, 0 #board row & board column
 
+restart()
 
 xray = True
 
@@ -35,6 +38,7 @@ xray = True
 
 
 def main(stdscr):
+    defcolors()
     # CONFIG STUFF:
     global brow, bcol, height, width, data, enter, compact, gwidth, placed, xac
     xac = stdscr
@@ -201,6 +205,8 @@ def main(stdscr):
             if key == ord(':'):
                 exec(commandinit(stdscr), globals())
                 fill(stdscr)
+            if key == 27:  # escape key
+                exec(pausemenu(stdscr), globals())
             getkeys = False
 
 
