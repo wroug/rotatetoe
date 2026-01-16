@@ -1,0 +1,12 @@
+{
+  "Back": {
+    "id": 0,
+    "yoffset": 0,
+    "xoffset": 0
+  },
+  "OK": {
+    "id": 1,
+    "yoffset": 0,
+    "xoffset": 6
+  }
+}
