@@ -53,5 +53,5 @@ def getbg():
 def drawbg(win, color_pair=7):
     background = getbg()
     for i in range(len(background)):
-        win.addstr(i, 0, background[i], curses.color_pair(7))
+        win.addstr(i, 0, background[i], curses.color_pair(color_pair))
     win.refresh()
