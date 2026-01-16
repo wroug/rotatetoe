@@ -14,7 +14,7 @@ from modules.tutorial import tutorial
 from modules.cleanup import cleanup
 from modules.uiscripts.pausemenu import *
 from modules.uiscripts.mainmenu import *
-
+from modules.uiscripts.gameend import  *
 from modules.colors import *
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
 from modules.generatenoise import generatenoise
@@ -44,13 +44,12 @@ restart()
 
 
 
-
 def main(stdscr):
     defcolors()
     # CONFIG STUFF:
     global brow, bcol, height, width, data, enter, compact, gwidth, placed, xac
     xac = stdscr
-
+    genbg(stdscr)
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
@@ -192,6 +191,11 @@ def main(stdscr):
             placed = False
             #time.sleep(0.2)
             #render()
+
+        if not any(" " in row for row in vdata):
+            gameend(stdscr, wins)
+
+
         wins = wincheck(data)
         #TEST(f"  x:{wins[0]} | o:{wins[1]} | {data}")                                                                                                  # -----------TESTLINE----------
         if tutorialyn:
