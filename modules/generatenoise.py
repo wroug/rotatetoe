@@ -28,3 +28,17 @@ def generatenoise(w, h, scale=20, seed=0, octaves=1):
         rows.append(row)
     return rows
 
+
+def genbg(win):
+    theight, twidth = win.getmaxyx()
+    ratiow = twidth / 238
+    ratioy = theight / 63
+    if ratiow > ratioy:
+        scalemult = ratioy
+    elif ratiow < ratioy:
+        scalemult = ratiow
+    else:
+        scalemult = ratiow
+    noiselist = generatenoise(twidth - 1, theight - 1, 20 * scalemult, randint(0, 1000000)
+    with open("modules/background.json", "w") as f:
+        json.dump({"background": noiselist}, f)
