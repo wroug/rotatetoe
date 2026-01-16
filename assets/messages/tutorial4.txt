@@ -1,2 +1,3 @@
 The entire board (purple and white) is the CONVEYOR
 Every turn when someone moves, every mark shifts towards the left by one square.
+.

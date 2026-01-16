@@ -34,9 +34,13 @@ def writewrapped(win, y, x, text, width, color_pair=0, calc=False):
     return linenumber
 
 
-def drawtextbox(win, y=-1, x=-1, width=20, height=-1, text="", color_pair=0):
+def drawtextbox(win, y=-1, x=-1, width=20, height=-1, text="", color_pair=0, variables=None):
     if height == -1:
-        height = writewrapped(win, y, x, text, width-2, color_pair, True)+2
+        height = writewrapped(win, y, x,
+                              text if variables is None else text.format(**variables),
+                              width-2, color_pair, True)+2
+
+    color_pair = 2
 
     theight, twidth = win.getmaxyx()
     menuwidth = width
@@ -62,10 +66,12 @@ def drawtextbox(win, y=-1, x=-1, width=20, height=-1, text="", color_pair=0):
             curses.color_pair(color_pair)
         )
     win.addstr(y+height-1, x, "█" + ("▄" * (width - 2)) + "█", curses.color_pair(color_pair))
-    writewrapped(win, y+1, x+1, text, width, color_pair)
+    writewrapped(win, y+1, x+1, text if variables is None else text.format(**variables), width, color_pair)
     return height
 
 def loadchoices(win, filename, y, x, color_pair=0, color_pair_selected=2, cursor=">"):
+
+    color_pair=7
 
     with open(f"assets/choices/{filename}") as f:
         file = json.load(f)
@@ -162,12 +168,23 @@ def inputbox(win, title, scale=20, height=5, inputfile="0"):
 
 
 
-def loadmenu(win, menufile):
+def loadmenu(win, menufile, variables=None):
 
     with open(f"assets/menus/{menufile}") as f:
         file = json.load(f)
 
-    fill(win, 7, "~")
+
+    fillbg = file["fillbg"]
+    if not (file["colorpairs"] is None):
+        colorpairbg = file["colorpairs"]["background"]
+        colorpairbox = file["colorpairs"]["box"]
+        colorpairchoices = file["colorpairs"]["choices"]
+    else:
+        colorpairbg = 7
+        colorpairbox = 1
+        colorpairchoices = 6
+    if fillbg:
+        fill(win, colorpairbg, "~")
     theight, twidth = win.getmaxyx()
 
     menuwidth = file["width"]
@@ -182,10 +199,10 @@ def loadmenu(win, menufile):
 
     location = centercoords(0, 0, menuwidth, twidth)
     h = theight - 1 - marginy
-    h = drawtextbox(win, marginy, location, menuwidth, -1, title + "\n"*(menuheight-3) , 1)
+    h = drawtextbox(win, marginy, location, menuwidth, -1, title + "\n"*(menuheight-3) , colorpairbox, variables)
     win.refresh()
     if choices != 0:
-        return loadchoices(win, choices, marginy + 3, location + 2, 6)
+        return loadchoices(win, choices, marginy + 3, location + 2, colorpairchoices)
 
 
 def displayerror(win, title, scale=20, height=5, inputfile="0"):

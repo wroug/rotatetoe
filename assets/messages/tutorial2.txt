@@ -1,2 +1,3 @@
 The game is a modified version of the classic Tic Tac Toe.
 Everything that's different will be explained shortly.
+.

@@ -1,2 +1,3 @@
 The white area is the GAME AREA.
 You can only move and place marks within the game area.
+.

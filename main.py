@@ -13,9 +13,12 @@ from modules.firsttimecheck import firsttimecheck
 from modules.tutorial import tutorial
 from modules.cleanup import cleanup
 from modules.uiscripts.pausemenu import *
+from modules.uiscripts.mainmenu import *
+
 from modules.colors import *
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
-
+from modules.generatenoise import generatenoise
+from random import randint
 
 @contextmanager #idk
 def section(name=None):
@@ -47,6 +50,7 @@ def main(stdscr):
     # CONFIG STUFF:
     global brow, bcol, height, width, data, enter, compact, gwidth, placed, xac
     xac = stdscr
+
     down, up, left, right = False, False, False, False
     curses.curs_set(0)
     stdscr.clear()
@@ -63,6 +67,10 @@ def main(stdscr):
     theight, twidth = stdscr.getmaxyx()
     def TEST(text="NONE"):
         stdscr.addstr(5,5,f"[TEST]-[{text}]")
+
+
+
+
 
     def cprint(text): #useless function with no purpse
         nonlocal row, col
@@ -93,7 +101,7 @@ def main(stdscr):
     #    stdscr.addstr(1,1,"Hello!")
     #    stdscr.refresh()
     last_blink = time.time()
-
+    mainmenu(stdscr)
     tutorialyn = firsttimecheck(stdscr)
 
     for y in range(theight-1):

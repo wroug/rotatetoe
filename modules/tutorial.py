@@ -12,7 +12,7 @@ def tutorial(disp):
     location=1
 
     while tutorialid != 10:
-        fill_rect(disp, marginy, location, twidth - 1 - (marginx * 2), h + 1, 1)
+        fill_rect(disp, marginy, location, twidth - 1 - (marginx * 2), h + 2, 1)
         location = centercoords(0, 0, twidth - 1 - (marginx * 2), twidth)
         h = drawtextbox(disp, marginy, location, twidth - 1 - (marginx * 2), -1, getmessage(f"tutorial{tutorialid}.txt"), 1)
 
@@ -23,7 +23,7 @@ def tutorial(disp):
         else:
             nav_file = "continueorback.json"
 
-        choice = loadchoices(disp, nav_file, marginy + h - 1, 9, 6)
+        choice = loadchoices(disp, nav_file, marginy + h - 3, 9, 6)
 
         if choice == 0:
             tutorialid += 1

@@ -2,5 +2,7 @@
   "title": "SETTINGS\n(restart to apply)",
   "choices": "settings.json",
   "width": 23,
-  "height": 10
+  "height": 10,
+  "fillbg": false,
+  "colorpairs": null
 }

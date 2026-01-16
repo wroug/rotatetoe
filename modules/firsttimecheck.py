@@ -21,7 +21,7 @@ def firsttimecheck(disp):
     if userdata["firsttime"]:
         location = centercoords(0, 0, twidth-1-(marginx*2), twidth)
         h=drawtextbox(disp, marginy, location, twidth-1-(marginx*2), -1, getmessage("tutorialask.txt"), 1)
-        choice = loadchoices(disp, "tutorialask.json", marginy+h-1,location+2, 6)
+        choice = loadchoices(disp, "tutorialask.json", marginy+h-3,location+2, 6)
         if choice == 1:
             disp.clear()
             return False

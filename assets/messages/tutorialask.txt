@@ -1,2 +1,3 @@
 Hello there! It seems like it is your first time playing this.
 Would you like a tutorial?
+.
