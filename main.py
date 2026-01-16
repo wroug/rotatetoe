@@ -22,12 +22,12 @@ def section(name=None):
     yield
 
 def restart():
-    global height, width, compact, gwidth, data, brow, bcol
+    global height, width, compact, gwidth, data, brow, bcol, xray
 
     with open("modules/data.json") as f:
         save = json.load(f)
 
-
+    xray = save["xray"]
     height = save["height"]
     width = save["width"]
     compact = False
@@ -37,7 +37,7 @@ def restart():
 
 restart()
 
-xray = True
+
 
 
 
@@ -137,6 +137,8 @@ def main(stdscr):
             data[brow][bcol] = ("X" if letter else "O") if data[brow][bcol] == " " else data[brow][bcol]
             letter = not letter
 
+        with open("modules/data.json") as f:
+            xray = json.load(f)["xray"]
 
         #TEST(vdata)
         def xrayrender():  #render function for seeing the background scrolling
