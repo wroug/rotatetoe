@@ -1,4 +1,4 @@
-from modules.generatenoise import generatenoise
+from modules.generatenoise import *
 from random import randint
 import curses
 from modules.uitools import *
@@ -22,21 +22,36 @@ def mainmenu(win):
     else:
         scalemult = ratiow
 
-    background = generatenoise(twidth - 1, theight - 1, 20 * scalemult, randint(0, 1000000), 1)
-    for i in range(len(background)):
-        win.addstr(i, 0, background[i], curses.color_pair(7))
-    win.refresh()
+    background = getbg()
 
-    heightmult = 0.2 if theight > 38 else 0.05
+    running = True
+    while running:
 
-    drawtextbox(win, text=getmessage("rotatetoe.txt"), width=49, y=int(theight*heightmult))
+        for i in range(len(background)):
+            win.addstr(i, 0, background[i], curses.color_pair(7))
+        win.refresh()
 
-    win.refresh()
-    choice = loadmenu(win, "mainmenu.json", {"username":username})
-    if choice == 0:
-        return
-    elif choice == 1:
-        settings(win)
+        heightmult = 0.2 if theight > 38 else 0.05
 
-    elif choice == 3:
-        cleanup()
+        drawtextbox(win, text=getmessage("rotatetoe.txt"), width=49, y=int(theight*heightmult))
+
+        win.refresh()
+        choice = loadmenu(win, "mainmenu.json", {"username":username})
+        if choice == 0:
+            running = False
+        elif choice == 1:
+            for i in range(len(background)):
+                win.addstr(i, 0, background[i], curses.color_pair(7))
+            win.refresh()
+
+            heightmult = 0.2 if theight > 38 else 0.05
+
+            drawtextbox(win, text=getmessage("rotatetoe.txt"), width=49, y=int(theight * heightmult))
+
+            settings(win)
+        elif choice == 2:
+            drawtextbox(win, text=getmessage("controls.txt"), width=49, )
+            win.getch()
+
+        elif choice == 3:
+            cleanup()

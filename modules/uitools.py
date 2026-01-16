@@ -2,6 +2,7 @@ import curses
 import textwrap
 import json
 from modules.centerui import *
+from modules.generatenoise import *
 
 
 def fill_rect(win, y, x, width, height, color_pair=0):
@@ -184,7 +185,8 @@ def loadmenu(win, menufile, variables=None):
         colorpairbox = 1
         colorpairchoices = 6
     if fillbg:
-        fill(win, colorpairbg, "~")
+        #fill(win, colorpairbg, "~")
+        drawbg()
     theight, twidth = win.getmaxyx()
 
     menuwidth = file["width"]

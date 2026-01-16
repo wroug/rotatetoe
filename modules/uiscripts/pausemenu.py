@@ -3,12 +3,15 @@ from modules.centerui import *
 from modules.getmessage import getmessage
 from modules.cleanup import *
 from modules.uiscripts.settings import *
+from modules.generatenoise import *
+from modules.bigrestart import *
 
 
 def pausemenu(win):
     inmenu = True
     while inmenu:
-        fill(win, 7, "~")
+        #fill(win, 7, "~")
+        drawbg(win)
         theight, twidth = win.getmaxyx()
 
 
@@ -33,7 +36,7 @@ def pausemenu(win):
             fill(win)
             return 'restart()'
         elif choice == 3:
-            cleanup()
+            restart_program()
             return "pass"
 
 
