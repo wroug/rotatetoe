@@ -13,17 +13,45 @@ def fill_rect(win, y, x, width, height, color_pair=0):
 
 def writewrapped(win, y, x, text, width, color_pair=0, calc=False):
     linenumber = 0
+    usable_width = width - 1
     for paragraph in text.splitlines():
-        lines = textwrap.wrap(paragraph, width) or [""]
+        lines = textwrap.wrap(
+            paragraph,
+            usable_width,
+            break_long_words=False,
+            break_on_hyphens=False
+        ) or [""]
         for line in lines:
             if not calc:
-                win.addstr(y + linenumber, x, " "+line, curses.color_pair(color_pair))
+                win.addnstr(
+                    y + linenumber,
+                    x,
+                    " " + line,
+                    width,
+                    curses.color_pair(color_pair)
+                )
             linenumber += 1
     return linenumber
 
-def drawtextbox(win, y, x, width, height=-1, text="", color_pair=0):
+
+def drawtextbox(win, y=-1, x=-1, width=20, height=-1, text="", color_pair=0):
     if height == -1:
         height = writewrapped(win, y, x, text, width-2, color_pair, True)+2
+
+    theight, twidth = win.getmaxyx()
+    menuwidth = width
+
+    if y == -1:
+        y = centercoords(0, 0, height, theight)
+
+    if x == -1:
+        x = centercoords(0, 0, menuwidth, twidth)
+
+
+
+
+
+
 
     win.addstr(y, x, "█"+("▀"*(width-2))+"█", curses.color_pair(color_pair))
     for row in range(height-2):
@@ -117,7 +145,7 @@ def inputbox(win, title, scale=20, height=5, inputfile="0"):
 
     location = centercoords(0, 0, menuwidth, twidth)
     h = theight - 1 - marginy
-    h = drawtextbox(win, marginy, location, menuwidth, height, title+"\n\n", 1)
+    h = drawtextbox(win, marginy, location, scale, height, title+"\n\n", 1)
 
     #curses.curs_set(1)
 
@@ -157,5 +185,25 @@ def loadmenu(win, menufile):
     h = drawtextbox(win, marginy, location, menuwidth, -1, title + "\n"*(menuheight-3) , 1)
     win.refresh()
     if choices != 0:
-        return loadchoices(win, choices, marginy + 2, location + 2, 6)
+        return loadchoices(win, choices, marginy + 3, location + 2, 6)
 
+
+def displayerror(win, title, scale=20, height=5, inputfile="0"):
+
+    fill(win, 6, "▞")
+    theight, twidth = win.getmaxyx()
+
+    menuwidth = scale
+
+    marginy = centercoords(0, 0, height, theight)
+    marginx = centercoords(0, 0, scale, twidth)
+
+    inputx = marginx + 2
+    inputy = marginy + 2
+
+    location = centercoords(0, 0, menuwidth, twidth)
+    h = theight - 1 - marginy
+    h = drawtextbox(win, marginy, location, menuwidth, height, title+"\n\n", 8)
+    #curses.curs_set(1)
+
+    loadchoices(win, "OK.json",inputy, inputx, color_pair_selected=9)
