@@ -156,7 +156,7 @@ def main(stdscr):
             board2 = drawboard(height, width, data, compact)           #draws the board
             drow, dcol = centercoords(board2, [twidth, theight])  #centers drawn board on the
             for i in board2:
-                stdscr.addstr(drow, dcol, i, curses.color_pair(1))     #displays with color 1
+                stdscr.addstr(drow, dcol, i, curses.color_pair(7))     #displays with color 1
                 drow += 1
             drow -= len(board2)                                        #moves display row back to original place
 
