@@ -4,3 +4,6 @@ ARROW KEYS - move cursor
 ENTER      - place a mark
 ESCAPE     - pause menu
 COLON      - command line
+
+
+>OK
