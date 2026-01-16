@@ -3,7 +3,7 @@ from modules.uitools import *
 from modules.centerui import centercoords
 from modules.getmessage import getmessage
 from modules.getuserdata import getuserdata
-
+from modules.generatenoise import *
 
 
 
@@ -19,6 +19,7 @@ def firsttimecheck(disp):
     marginx = marginy * 2
 
     if userdata["firsttime"]:
+        drawbg(disp)
         location = centercoords(0, 0, twidth-1-(marginx*2), twidth)
         h=drawtextbox(disp, marginy, location, twidth-1-(marginx*2), -1, getmessage("tutorialask.txt"), 1)
         choice = loadchoices(disp, "tutorialask.json", marginy+h-3,location+2, 6)
