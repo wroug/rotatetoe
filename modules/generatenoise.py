@@ -1,5 +1,7 @@
 from opensimplex import OpenSimplex
-
+import json
+from random import randint
+import curses
 
 def generatenoise(w, h, scale=20, seed=0, octaves=1):
     shades = [' ', '░', '▒', '▓', '█']
@@ -39,6 +41,17 @@ def genbg(win):
         scalemult = ratiow
     else:
         scalemult = ratiow
-    noiselist = generatenoise(twidth - 1, theight - 1, 20 * scalemult, randint(0, 1000000)
+    noiselist = generatenoise(twidth - 1, theight - 1, 20 * scalemult, randint(0, 1000000))
     with open("modules/background.json", "w") as f:
         json.dump({"background": noiselist}, f)
+
+
+def getbg():
+    with open("modules/background.json", "r") as f:
+        return json.load(f)["background"]
+
+def drawbg(win, color_pair=7):
+    background = getbg()
+    for i in range(len(background)):
+        win.addstr(i, 0, background[i], curses.color_pair(7))
+    win.refresh()
