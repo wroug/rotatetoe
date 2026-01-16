@@ -70,7 +70,8 @@ def main(stdscr):
 
 
 
-
+    if theight < 27:
+        displayerror(stdscr, "SMALL SCREEN\nResize terminal. \nContinuing may cause visual glitches", height=int(theight*0.5), scale=int(twidth*0.5))
 
     def cprint(text): #useless function with no purpse
         nonlocal row, col

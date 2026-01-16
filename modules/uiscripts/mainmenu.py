@@ -26,7 +26,10 @@ def mainmenu(win):
     for i in range(len(background)):
         win.addstr(i, 0, background[i], curses.color_pair(7))
     win.refresh()
-    drawtextbox(win, text=getmessage("rotatetoe.txt"), width=49, y=int(theight*0.2))
+
+    heightmult = 0.2 if theight > 38 else 0.05
+
+    drawtextbox(win, text=getmessage("rotatetoe.txt"), width=49, y=int(theight*heightmult))
 
     win.refresh()
     choice = loadmenu(win, "mainmenu.json", {"username":username})

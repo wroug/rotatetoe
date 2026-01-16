@@ -216,7 +216,7 @@ def displayerror(win, title, scale=20, height=5, inputfile="0"):
     marginx = centercoords(0, 0, scale, twidth)
 
     inputx = marginx + 2
-    inputy = marginy + 2
+    inputy = marginy + height - 3
 
     location = centercoords(0, 0, menuwidth, twidth)
     h = theight - 1 - marginy
