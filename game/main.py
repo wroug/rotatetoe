@@ -17,8 +17,9 @@ from modules.uiscripts.mainmenu import *
 from modules.uiscripts.gameend import  *
 from modules.colors import *
 locale.setlocale(locale.LC_ALL, '') #sets some locale thing
-from modules.generatenoise import generatenoise
+from modules.generatenoise import *
 from random import randint
+from modules.uitools import *
 
 @contextmanager #idk
 def section(name=None):
@@ -47,7 +48,7 @@ restart()
 def main(stdscr):
     defcolors()
     # CONFIG STUFF:
-    global brow, bcol, height, width, data, enter, compact, gwidth, placed, xac
+    global brow, bcol, height, width, data, enter, compact, gwidth, placed, xac, wins
     xac = stdscr
     genbg(stdscr)
     down, up, left, right = False, False, False, False
@@ -63,6 +64,7 @@ def main(stdscr):
     clear = True
     placed = False
     row, col = 5, 5
+    wins = wincheck(data)
     theight, twidth = stdscr.getmaxyx()
     def TEST(text="NONE"):
         stdscr.addstr(5,5,f"[TEST]-[{text}]")
@@ -107,10 +109,10 @@ def main(stdscr):
     for y in range(theight-1):
             stdscr.addstr(y, 0, " "*(twidth-1), curses.color_pair(1))
     stdscr.refresh()
-
+    wins = (0,0)
     running = True
     while running:
-
+        wins = wincheck(data)
 
 
 
@@ -166,16 +168,16 @@ def main(stdscr):
 
 
         def render(): #main playable board rendering
-            global vdata
+            global vdata, wins
             vdata = getvisualdata(data, gwidth)
 
             board = drawboard(height, gwidth, vdata, compact)                                   #draws board
             drow, dcol = centercoords(board2 if xray else board, [twidth, theight])#if xray is on, sets board location to be at left side of xray board
 
             #draw points:
-            pointstext = f"X: {wins[0]}       Y: {wins[1]}"
+            pointstext = f"X: {wins[0]}       O: {wins[1]}"
             pcol = centercoords(0, 0, len(pointstext), twidth)
-            stdscr.addstr(drow-2, pcol, pointstext)
+            stdscr.addstr(drow-2, pcol, pointstext, curses.color_pair(2))
             for i in board:
 
                 stdscr.addstr(drow, dcol, i, curses.color_pair(2))                              #displays board
@@ -201,7 +203,7 @@ def main(stdscr):
             gameend(stdscr, wins)
 
 
-        wins = wincheck(data)
+
         #TEST(f"  x:{wins[0]} | o:{wins[1]} | {data}")                                                                                                  # -----------TESTLINE----------
         if tutorialyn:
             tutorial(stdscr)
