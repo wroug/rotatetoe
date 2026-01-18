@@ -13,7 +13,7 @@ Rotatetoe is a game like tic-tac-toe, but with more strategic planning as the bo
 
 How to install:
 ```bash
-wget https://github.com/wroug/rotatetoe/releases/latest/download/rotatetoe-linux.tar.gz
+wget https://github.com/wroug/rotatetoe/releases/download/v0.1.0/rotatetoe-linux.tar.gz
 tar -xzf rotatetoe-linux.tar.gz
 bash rotatetoe-linux/bin/install.sh
 ```
@@ -26,7 +26,7 @@ bash rotatetoe-linux/bin/install.sh
 
 How to install:
 ```cmd
-curl -LO https://github.com/wroug/rotatetoe/releases/latest/download/rotatetoe-windows.zip
+curl -LO https://github.com/wroug/rotatetoe/releases/download/v0.1.0/rotatetoe-windows.zip
 powershell -Command "Expand-Archive rotatetoe-windows.zip"
 rotatetoe-windows\bin\windows\install.bat
 ```
