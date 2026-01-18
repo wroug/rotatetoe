@@ -12,7 +12,7 @@ TMP_UPDATE="/tmp/rotatetoe-update"
 REPO_URL="https://github.com/wroug/rotatetoe"
 LOCAL_VERSION=$(<"$LOCAL_SHARE/version.txt")
 ORIGIN_VERSION=$(curl -s https://raw.githubusercontent.com/wroug/rotatetoe/main/version.txt | tr -d "\n")
-RELEASE_ZIP_URL="$REPO_URL/releases/download/$ORIGIN_VERSION/rotatetoe-linux.tar.gz"
+RELEASE_ZIP_URL="$REPO_URL/archive/refs/tags/$ORIGIN_VERSION.tar.gz"
 
 
 if [ "$LOCAL_VERSION" = "$ORIGIN_VERSION" ]; then
