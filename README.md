@@ -15,7 +15,7 @@ How to install:
 ```bash
 wget https://github.com/wroug/rotatetoe/releases/download/v0.1.0/rotatetoe-linux.tar.gz
 tar -xzf rotatetoe-linux.tar.gz
-bash rotatetoe-linux/bin/install.sh
+bash rotatetoe/bin/install.sh
 ```
 
 ### Windows:
@@ -28,7 +28,7 @@ How to install:
 ```cmd
 curl -LO https://github.com/wroug/rotatetoe/releases/download/v0.1.0/rotatetoe-windows.zip
 powershell -Command "Expand-Archive rotatetoe-windows.zip"
-rotatetoe-windows\bin\windows\install.bat
+rotatetoe\bin\windows\install.bat
 ```
 
 ### Running without installation:
