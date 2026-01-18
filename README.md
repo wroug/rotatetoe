@@ -16,7 +16,6 @@ How to install:
 wget https://github.com/wroug/rotatetoe/archive/refs/tags/v0.1.1.tar.gz
 tar -xzf v0.1.1.tar.gz
 bash rotatetoe-0.1.1/bin/install.sh
-rm -rf v0.1.1.tar.gz rotatetoe-0.1.1
 ```
 
 ### Windows:
@@ -24,13 +23,13 @@ rm -rf v0.1.1.tar.gz rotatetoe-0.1.1
 1. Download the latest .zip release.
 2. Extract it.
 3. Go to the `bin\windows` directory and run the installer.
+(rotatetoe has not been really tested on windows so expect bugs)
 
 How to install:
 ```cmd
 curl -LO https://github.com/wroug/rotatetoe/archive/refs/tags/v0.1.1.zip
 powershell -Command "Expand-Archive 'v0.1.1.zip'"
 rotatetoe-0.1.1\bin\windows\install.bat
-rmdir /s /q rotatetoe-0.1.1
 ```
 
 ### Running without installation:
