@@ -69,7 +69,7 @@ else
     done
 fi
 
-echo "Tip: Resize your terminal now if needed; it's harder to change later. (enter to continue)"
+echo "Tip: Resize and zoom your terminal now if needed; it's harder to change later. (enter to continue)"
 read
 
 cd "$LOCAL_SHARE/game"
