@@ -10,7 +10,7 @@ LOCAL_SHARE="$HOME/.local/share/$GAME_NAME"
 TMP_CURRENT="/tmp/rotatetoe-current"
 TMP_UPDATE="/tmp/rotatetoe-update"
 REPO_URL="https://github.com/wroug/rotatetoe"
-RELEASE_ZIP_URL="$REPO_URL/releases/latest/download/rotatetoe-linux.zip"
+RELEASE_ZIP_URL="$REPO_URL/releases/latest/download/rotatetoe-linux.tar.gz"
 LOCAL_VERSION=$(<"$LOCAL_SHARE/version.txt")
 ORIGIN_VERSION=$(curl -s https://raw.githubusercontent.com/wroug/rotatetoe/main/version.txt | tr -d "\n")
 
