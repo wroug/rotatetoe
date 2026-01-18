@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 LOCAL_SHARE="$HOME/.local/share/rotatetoe"
+LOCAL_VERSION=$(<"$LOCAL_SHARE/version.txt")
+ORIGIN_VERSION=$(curl -s --connect-timeout 5 https://raw.githubusercontent.com/wroug/rotatetoe/main/version.txt | tr -d "\n")
+
+
 
 case "$1" in
     --uninstall)
@@ -9,10 +13,25 @@ case "$1" in
         ;;
     --update)
         "$LOCAL_SHARE/bin/initupdate.sh"
+        exit 0
+        ;;
+    --version)
+        echo "$(cat "$LOCAL_SHARE/version.txt")"
+        exit 0
+        ;;
+    "")
+        ;;
+    *)
+        echo "Unknown argument: $1"
+        exit 1
+        ;;
+esac
 
-
-
-
+if [ "$LOCAL_VERSION" != "$ORIGIN_VERSION" ]; then
+    echo "An update is available. Update with:"
+    echo "    rotatetoe --update"
+    echo ""
+fi
 
 cd "$HOME/.local/share/rotatetoe"
 
@@ -59,6 +78,6 @@ cd "$LOCAL_SHARE/game"
 python3 main.py
 deactivate
 echo "If you encountered any problems, feel free to make an issue at https://github.com/wroug/rotatetoe/issues"
-echo "We hope you had fun! Press enter to close"
+echo "We hope you had fun!"
 
-read
+
