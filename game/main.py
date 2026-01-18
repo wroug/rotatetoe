@@ -170,7 +170,12 @@ def main(stdscr):
             vdata = getvisualdata(data, gwidth)
 
             board = drawboard(height, gwidth, vdata, compact)                                   #draws board
-            drow, dcol = centercoords(board2 if xray else board, [twidth, theight])        #if xray is on, sets board location to be at left side of xray board
+            drow, dcol = centercoords(board2 if xray else board, [twidth, theight])#if xray is on, sets board location to be at left side of xray board
+
+            #draw points:
+            pointstext = f"X: {wins[0]}       Y: {wins[1]}"
+            pcol = centercoords(0, 0, len(pointstext), twidth)
+            stdscr.addstr(drow-2, pcol, pointstext)
             for i in board:
 
                 stdscr.addstr(drow, dcol, i, curses.color_pair(2))                              #displays board
