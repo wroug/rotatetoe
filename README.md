@@ -32,15 +32,18 @@ powershell -Command "Expand-Archive 'v0.1.1.zip'"
 rotatetoe-0.1.1\bin\windows\install.bat
 ```
 
-### Running without installation:
+### Running without installation: (if other steps failed)
 
 You can also run the game directly without installing:
 
 1. Extract the downloaded file.
 2. Enter the directory
-3. `pip install -r requirements.txt`
-4. `cd game`
-5. `python main.py`
+-# create a python venv if it neccessary for your device
+4. `pip install -r requirements.txt`
+5. `cd game`
+6. `python main.py`
+
+### If you encounter any problems during installation feel free to make an issue!
 
 ## Requirements:
 
