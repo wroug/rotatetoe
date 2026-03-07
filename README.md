@@ -6,20 +6,8 @@ Rotatetoe is a game like tic-tac-toe, but with more strategic planning as the bo
 
 ### Linux:
 
-1. Download the latest tar.gz release.
-2. Extract it.
-3. Go to the `bin` directory and run the installer.
-
-
-#### How to install:  
-A) Download and run the linux installer binary  
-
-B) Install from source code  
-```bash
-wget https://github.com/wroug/rotatetoe/archive/refs/tags/v1.0.1.tar.gz
-tar -xzf v1.0.1.tar.gz
-bash rotatetoe-1.0.1/bin/install.sh
-```
+1. Download the latest installer binary.
+2. Run it.  
 
 ### Windows:
 
@@ -28,7 +16,7 @@ bash rotatetoe-1.0.1/bin/install.sh
 3. Go to the `bin\windows` directory and run the installer.
 (rotatetoe has not been really tested on windows so expect bugs)
 
-How to install:
+Install command:
 ```cmd
 curl -LO https://github.com/wroug/rotatetoe/archive/refs/tags/v1.0.1.zip
 powershell -Command "Expand-Archive 'v1.0.1.zip'"
